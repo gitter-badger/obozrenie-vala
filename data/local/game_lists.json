@@ -1,0 +1,413 @@
+{
+    "rigsofrods": {
+        "name": "Rigs of Rods",
+        "proxy": "requests_http",
+        "adapter": "rigsofrods",
+        "launch_pattern": "rigsofrods",
+        "settings": [{
+            "name": "path",
+            "type": "string",
+            "default": "/usr/bin/RoR"
+        }, {
+            "name": "master_uri",
+            "type": "string[]",
+            "default": ["http://api.rigsofrods.com/serverlist"]
+        }]
+    },
+    "minetest": {
+        "name": "Minetest",
+        "proxy": "requests_http",
+        "adapter": "minetest",
+        "launch_pattern": "minetest",
+        "settings": [{
+            "name": "path",
+            "type": "string",
+            "default": "/usr/bin/minetest"
+        }, {
+            "name": "master_uri",
+            "type": "string[]",
+            "default": ["http://servers.minetest.net/list"]
+        }, {
+            "name": "nickname",
+            "type": "string",
+            "default": "Player"
+        }]
+    },
+    "freeminer": {
+        "name": "Freeminer",
+        "proxy": "requests_http",
+        "adapter": "minetest",
+        "launch_pattern": "minetest",
+        "settings": [{
+            "name": "path",
+            "type": "string",
+            "default": "/usr/bin/freeminer"
+        }, {
+            "name": "master_uri",
+            "type": "string[]",
+            "default": ["http://servers.freeminer.org/list"]
+        }, {
+            "name": "nickname",
+            "type": "string",
+            "default": "Player"
+        }]
+    },
+    "csgo": {
+        "name": "Counter-Strike: Global Offensive",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "730",
+        "settings": [{
+            "name": "path",
+            "type": "string",
+            "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/csgo_linux"
+        }, {
+            "name": "workdir",
+            "type": "string",
+            "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive"
+        }, {
+            "name": "master_uri",
+            "type": "string[]",
+            "default": ["master://hl2master.steampowered.com:27011"]
+        }, {
+            "name": "steam_launch",
+            "type": "bool",
+            "default": true
+        }, {
+            "name": "steam_path",
+            "type": "string",
+            "default": "steam"
+        }]
+    },
+    "cstrike": {
+        "name": "Counter-Strike: Source",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "240",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "dod": {
+        "name": "Day of Defeat: Source",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "300",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "garrysmod": {
+        "name": "Garry's Mod",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "400",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "gesource": {
+        "name": "GoldenEye: Source",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "settings": [
+            "path",
+            "master_uri"
+        ]
+    },
+    "hl1mp": {
+        "name": "Half-Life Deathmatch: Source",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "360",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "hl2mp": {
+        "name": "Half-Life 2: Deathmatch",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "320",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "left4dead2": {
+        "name": "Left 4 Dead 2",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "550",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "portal2": {
+        "name": "Portal 2",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "620",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "tf": {
+        "name": "Team Fortress 2",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "hl2",
+        "steam_app_id": "440",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri",
+            "steam_launch",
+            "steam_path"
+        ]
+    },
+    "alienarena": {
+        "name": "Alien Arena",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "doom3": {
+        "name": "Doom 3",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "jediacademy": {
+        "name": "Star Wars Jedi Knight II: Jedi Academy",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "jedioutcast": {
+        "name": "Star Wars Jedi Knight II: Jedi Outcast",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "q2": {
+        "name": "Quake II",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "q3a": {
+        "name": "Quake III Arena",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "q4": {
+        "name": "Quake 4",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "qw": {
+        "name": "QuakeWorld",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "rtcw": {
+        "name": "Return to Castle Wolfenstein",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "et": {
+        "name": "Wolfenstein: Enemy Territory",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "openarena": {
+        "name": "OpenArena",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "openttd": {
+        "name": "OpenTTD",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "openttd",
+        "settings": [
+            "path",
+            "master_uri"
+        ]
+    },
+    "stef1": {
+        "name": "Star Trek: Voyager - Elite Force",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "turtlearena": {
+        "name": "Turtle Arena",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "unvanquished": {
+        "name": "Unvanquished",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "urbanterror": {
+        "name": "Urban Terror",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "warsow": {
+        "name": "Warsow",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "wop": {
+        "name": "World of Padman",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    },
+    "xonotic": {
+        "name": "Xonotic",
+        "proxy": "qstat_output",
+        "adapter": "qstat",
+        "launch_pattern": "quake",
+        "settings": [
+            "path",
+            "workdir",
+            "master_uri"
+        ]
+    }
+}
