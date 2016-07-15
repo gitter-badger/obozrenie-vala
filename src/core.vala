@@ -433,6 +433,33 @@ public class Core : GLib.Object {
     public Geoip.Geodata geocoder ;
     private GLib.Mutex m ;
 
+    public void refresh_servers(string id) {
+        this.m.lock( ) ;
+        if( this.game_table.get_query_status (id) != QueryStatus.WORKING ){
+            this.game_table.set_query_status (id, QueryStatus.WORKING) ;
+            new Thread<void *>(null, () => {
+                try {
+                    var fn = this.game_table.get_query_func (id) ;
+
+                    var data = fn (this.game_table.get_settings (id)) ;
+
+                    foreach( Server v in data ){
+                        v.country = geocoder.country_code_by_name (v.host) ;
+                    }
+
+                    this.game_table.remove_servers (id) ;
+                    this.game_table.insert_servers (id, data) ;
+                } catch ( Error e ){
+                    this.game_table.set_query_status (id, QueryStatus.ERROR) ;
+                    return null ;
+                }
+                this.game_table.set_query_status (id, QueryStatus.READY) ;
+                return null ;
+            }) ;
+        }
+        this.m.unlock () ;
+    }
+
     public Core (string geoip_file_name = "") {
         this.game_table = new GameTable () ;
         this.geocoder = new Geoip.Geodata () ;
