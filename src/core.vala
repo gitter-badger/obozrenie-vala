@@ -28,7 +28,8 @@ public delegate bool ServerCompareFunc(Server data) ;
 
 public errordomain GameTableError {
     EXISTS,
-    DOES_NOT_EXIST
+    DOES_NOT_EXIST,
+    INVALID_TYPE
 }
 
 public enum QueryStatus {
@@ -93,16 +94,21 @@ public class Server : GLib.Object {
 
 }
 
+public class ConfigValue : GLib.Object {
+    public GLib.VariantType type ;
+    public GLib.Variant data ;
+}
+
 public class GameEntry : GLib.Object {
     public QueryStatus status ;
 
-    public GLib.KeyFile settings ;
+    public Gee.HashMap<SettingGroup, Gee.HashMap<string, ConfigValue> > settings ;
     public Gee.LinkedList<Server ? > servers ;
 
     public QueryFunc query_func ;
 
     public GameEntry () {
-        this.settings = new GLib.KeyFile () ;
+        this.settings = new Gee.HashMap<SettingGroup, Gee.HashMap<string, ConfigValue> >() ;
         this.servers = new Gee.LinkedList<Server ? >() ;
     }
 
@@ -167,7 +173,7 @@ public class GameTable : GLib.Object {
         return entries ;
     }
 
-    public void create_setting(string id, SettingGroup t, string k) throws GameTableError {
+    public void create_setting(string id, GLib.VariantType t, SettingGroup g, string k, GLib.Variant ? data = null) throws GameTableError {
         this.m.lock( ) ;
 
         try {
@@ -175,7 +181,15 @@ public class GameTable : GLib.Object {
                 throw new GameTableError.DOES_NOT_EXIST (id) ;
             }
 
-            this.data.get (id).settings.set_value (get_setting_group_string (t), k, "") ;
+            if( !this.data.get (id).settings.has_key (g)){
+                this.data.get (id).settings.set (g, new Gee.HashMap<string, ConfigValue>()) ;
+            }
+
+            var v = new ConfigValue () ;
+            v.type = t ;
+            v.data = data ;
+
+            this.data.get (id).settings.get (g).set (k, v) ;
 
             this.changed (id) ;
             this.settings_changed (id) ;
@@ -184,7 +198,7 @@ public class GameTable : GLib.Object {
         }
     }
 
-    public void set_setting(string id, SettingGroup t, string k, string v) throws GameTableError {
+    public void set_setting(string id, SettingGroup g, string k, GLib.Variant v) throws GameTableError {
         this.m.lock( ) ;
 
         try {
@@ -192,17 +206,21 @@ public class GameTable : GLib.Object {
                 throw new GameTableError.DOES_NOT_EXIST (id) ;
             }
 
-            string g = get_setting_group_string (t) ;
-
-            if( !this.data.get (id).settings.has_group (g)){
-                throw new GameTableError.DOES_NOT_EXIST ("No setting group %s for game %s".printf (g, id)) ;
+            if( !this.data.get (id).settings.has_key (g)){
+                throw new GameTableError.DOES_NOT_EXIST ("No setting group %s for game %s".printf (get_setting_group_string (g), id)) ;
             }
 
-            if( !this.data.get (id).settings.has_key (g, k)){
-                throw new GameTableError.DOES_NOT_EXIST ("No setting key %s for game %s, group %s".printf (k, id, g)) ;
+            if( !this.data.get (id).settings.get (g).has_key (k)){
+                throw new GameTableError.DOES_NOT_EXIST ("No setting key %s for game %s, group %s".printf (k, id, get_setting_group_string (g))) ;
             }
 
-            this.data.get (id).settings.set_string (g, k, v) ;
+            var dtype = this.data.get (id).settings.get (g).get (k).type ;
+            var vtype = v.get_type () ;
+            if( dtype != vtype ){
+                throw new GameTableError.INVALID_TYPE ("Invalid type (%s), expected %s".printf (vtype.dup_string (), dtype.dup_string ())) ;
+            }
+
+            this.data.get (id).settings.get (g).get (k).data = v ;
 
             this.changed (id) ;
             this.settings_changed (id) ;
@@ -211,8 +229,8 @@ public class GameTable : GLib.Object {
         }
     }
 
-    public string get_setting(string id, SettingGroup t, string k) throws GameTableError {
-        string v = "" ;
+    public GLib.Variant get_setting(string id, SettingGroup g, string k) throws GameTableError {
+        GLib.Variant v ;
 
         this.m.lock( ) ;
 
@@ -221,15 +239,15 @@ public class GameTable : GLib.Object {
                 throw new GameTableError.DOES_NOT_EXIST (id) ;
             }
 
-            string g = get_setting_group_string (t) ;
-
-            try {
-                v = this.data.get (id).settings.get_string (get_setting_group_string (t), k) ;
-            } catch ( GLib.KeyFileError.GROUP_NOT_FOUND e ){
-                throw new GameTableError.DOES_NOT_EXIST ("No setting group %s for game %s".printf (g, id)) ;
-            } catch ( GLib.KeyFileError.KEY_NOT_FOUND e ){
-                throw new GameTableError.DOES_NOT_EXIST ("No setting key %s for game %s, group %s".printf (k, id, g)) ;
+            if( !this.data.get (id).settings.has_key (g)){
+                throw new GameTableError.DOES_NOT_EXIST ("No setting group %s for game %s".printf (get_setting_group_string (g), id)) ;
             }
+
+            if( !this.data.get (id).settings.get (g).has_key (k)){
+                throw new GameTableError.DOES_NOT_EXIST ("No setting key %s for game %s, group %s".printf (k, id, get_setting_group_string (g))) ;
+            }
+
+            v = this.data.get (id).settings.get (g).get (k).data ;
         } finally {
             this.m.unlock () ;
         }
@@ -266,7 +284,7 @@ public class GameTable : GLib.Object {
     }
 
     public QueryFunc get_query_func(string id) throws GameTableError {
-        QueryFunc v = null;
+        QueryFunc v = null ;
 
         this.atomic_exec (() => {
             if( !this.data.has_key (id)){
@@ -411,13 +429,21 @@ public class GameTable : GLib.Object {
 
             this.create_game_entry (game_name) ;
 
-            this.create_setting (game_name, SettingGroup.SYSTEM, name_setting ()) ;
-            this.set_setting (game_name, SettingGroup.SYSTEM, name_setting (), game_object.get_string_member ("name")) ;
+            this.create_setting (game_name, GLib.VariantType.STRING, SettingGroup.SYSTEM, name_setting (), game_object.get_string_member ("name")) ;
 
-            game_object.get_array_member ("settings").foreach_element ((settings_object, setting_index, setting_name) => {
-                string k = setting_name.get_string () ;
-                this.create_setting (game_name, SettingGroup.USER, k) ;
-            }) ;
+            var sobj = game_object.get_object_member ("settings") ;
+            if( sobj != null ){
+                sobj.foreach_member ((o, k, entry_data_node) => {
+                    var entry_data = entry_data_node.get_object () ;
+                    var typestring = entry_data.get_string_member ("type") ;
+                    if( GLib.VariantType.string_is_valid (typestring)){
+                        this.create_setting (game_name, new GLib.VariantType (typestring), SettingGroup.USER, k) ;
+                        if( entry_data.has_member ("default")){
+                            this.set_setting (game_name, SettingGroup.USER, k, entry_data.get_member ("default").get_value ().get_variant ()) ;
+                        }
+                    }
+                }) ;
+            }
 
         }) ;
     }
