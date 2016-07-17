@@ -1,413 +1,724 @@
 {
     "rigsofrods": {
         "name": "Rigs of Rods",
-        "proxy": "requests_http",
-        "adapter": "rigsofrods",
+        "backend": "rigsofrods",
         "launch_pattern": "rigsofrods",
-        "settings": [{
-            "name": "path",
-            "type": "string",
-            "default": "/usr/bin/RoR"
-        }, {
-            "name": "master_uri",
-            "type": "string[]",
-            "default": ["http://api.rigsofrods.com/serverlist"]
-        }]
+        "settings": {
+            "path": {
+                "type": "s",
+                "default": "/usr/bin/RoR",
+                "gui_weight": 1
+            },
+            "master_uri": {
+                "type": "as",
+                "default": ["http://api.rigsofrods.com/serverlist"],
+                "gui_weight": 2
+            }
+        }
     },
     "minetest": {
         "name": "Minetest",
-        "proxy": "requests_http",
-        "adapter": "minetest",
+        "backend": "minetest",
         "launch_pattern": "minetest",
-        "settings": [{
-            "name": "path",
-            "type": "string",
-            "default": "/usr/bin/minetest"
-        }, {
-            "name": "master_uri",
-            "type": "string[]",
-            "default": ["http://servers.minetest.net/list"]
-        }, {
-            "name": "nickname",
-            "type": "string",
-            "default": "Player"
-        }]
+        "settings": {
+            "path": {
+                "type": "s",
+                "default": "/usr/bin/minetest",
+                "gui_weight": 1
+            },
+            "master_uri": {
+                "type": "as",
+                "default": ["http://servers.minetest.net/list"],
+                "gui_weight": 2
+            },
+            "nickname": {
+                "type": "s",
+                "default": "Player",
+                "gui_weight": 3
+            }
+        }
     },
     "freeminer": {
         "name": "Freeminer",
-        "proxy": "requests_http",
-        "adapter": "minetest",
+        "backend": "minetest",
         "launch_pattern": "minetest",
-        "settings": [{
-            "name": "path",
-            "type": "string",
-            "default": "/usr/bin/freeminer"
-        }, {
-            "name": "master_uri",
-            "type": "string[]",
-            "default": ["http://servers.freeminer.org/list"]
-        }, {
-            "name": "nickname",
-            "type": "string",
-            "default": "Player"
-        }]
-    },
-    "csgo": {
-        "name": "Counter-Strike: Global Offensive",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "730",
-        "settings": [{
-            "name": "path",
-            "type": "string",
-            "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/csgo_linux"
-        }, {
-            "name": "workdir",
-            "type": "string",
-            "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive"
-        }, {
-            "name": "master_uri",
-            "type": "string[]",
-            "default": ["master://hl2master.steampowered.com:27011"]
-        }, {
-            "name": "steam_launch",
-            "type": "bool",
-            "default": true
-        }, {
-            "name": "steam_path",
-            "type": "string",
-            "default": "steam"
-        }]
-    },
-    "cstrike": {
-        "name": "Counter-Strike: Source",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "240",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "dod": {
-        "name": "Day of Defeat: Source",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "300",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "garrysmod": {
-        "name": "Garry's Mod",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "400",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "gesource": {
-        "name": "GoldenEye: Source",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "settings": [
-            "path",
-            "master_uri"
-        ]
-    },
-    "hl1mp": {
-        "name": "Half-Life Deathmatch: Source",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "360",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "hl2mp": {
-        "name": "Half-Life 2: Deathmatch",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "320",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "left4dead2": {
-        "name": "Left 4 Dead 2",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "550",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "portal2": {
-        "name": "Portal 2",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "620",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "tf": {
-        "name": "Team Fortress 2",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "hl2",
-        "steam_app_id": "440",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri",
-            "steam_launch",
-            "steam_path"
-        ]
-    },
-    "alienarena": {
-        "name": "Alien Arena",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "doom3": {
-        "name": "Doom 3",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "jediacademy": {
-        "name": "Star Wars Jedi Knight II: Jedi Academy",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "jedioutcast": {
-        "name": "Star Wars Jedi Knight II: Jedi Outcast",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "q2": {
-        "name": "Quake II",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "q3a": {
-        "name": "Quake III Arena",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "q4": {
-        "name": "Quake 4",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "qw": {
-        "name": "QuakeWorld",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "rtcw": {
-        "name": "Return to Castle Wolfenstein",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "et": {
-        "name": "Wolfenstein: Enemy Territory",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "openarena": {
-        "name": "OpenArena",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "openttd": {
-        "name": "OpenTTD",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "openttd",
-        "settings": [
-            "path",
-            "master_uri"
-        ]
-    },
-    "stef1": {
-        "name": "Star Trek: Voyager - Elite Force",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "turtlearena": {
-        "name": "Turtle Arena",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "unvanquished": {
-        "name": "Unvanquished",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "urbanterror": {
-        "name": "Urban Terror",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "warsow": {
-        "name": "Warsow",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "wop": {
-        "name": "World of Padman",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
-    },
-    "xonotic": {
-        "name": "Xonotic",
-        "proxy": "qstat_output",
-        "adapter": "qstat",
-        "launch_pattern": "quake",
-        "settings": [
-            "path",
-            "workdir",
-            "master_uri"
-        ]
+        "settings": {
+            "path": {
+                "type": "s",
+                "default": "/usr/bin/freeminer",
+                "gui_weight": 1
+            },
+            "master_uri": {
+                "type": "as",
+                "default": ["http://servers.freeminer.org/list"],
+                "gui_weight": 2
+            },
+            "nickname": {
+                "type": "s",
+                "default": "Player",
+                "gui_weight": 3
+            }
+        },
+        "csgo": {
+            "name": "Counter-Strike: Global Offensive",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/csgo_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 730,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "cstrike": {
+            "name": "Counter-Strike: Source",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Source/hl2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Counter-Strike Source",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011", "master://46.165.194.16:27011", "master://46.4.71.67:27011", "master://46.165.194.14:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 240,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "dod": {
+            "name": "Day of Defeat: Source",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Day of Defeat Source/hl2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Day of Defeat Source",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 300,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "garrysmod": {
+            "name": "Garry's Mod",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/GarrysMod/hl2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/GarrysMod/hl2_linux",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 400,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "gesource": {
+            "name": "GoldenEye: Source",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "hl1mp": {
+            "name": "Half-Life Deathmatch: Source",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/GarrysMod/hl2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/GarrysMod/hl2_linux",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 360,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "hl2mp": {
+            "name": "Half-Life 2: Deathmatch",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Half-Life 2 Deathmatch/hl2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Half-Life 2 Deathmatch",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 320,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "left4dead2": {
+            "name": "Left 4 Dead 2",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Left 4 Dead 2/hl2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Left 4 Dead 2",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 550,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "portal2": {
+            "name": "Portal 2",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Portal 2/portal2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Portal 2",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 620,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "tf": {
+            "name": "Team Fortress 2",
+            "backend": "qstat",
+            "launch_pattern": "hl2",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Team Fortress 2/hl2_linux",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "~/.local/share/Steam/steamapps/common/Team Fortress 2",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://hl2master.steampowered.com:27011"],
+                    "gui_weight": 3
+                },
+                "steam_app_id": {
+                    "type": "i",
+                    "default": 440,
+                    "gui_weight": 4
+                },
+                "steam_launch": {
+                    "type": "b",
+                    "default": true,
+                    "gui_weight": 5
+                },
+                "steam_path": {
+                    "type": "s",
+                    "default": "steam",
+                    "gui_weight": 6
+                }
+            }
+        },
+        "alienarena": {
+            "name": "Alien Arena",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "alienarena",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://master.corservers.com:27900", "master://master2.corservers.com:27900"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "doom3": {
+            "name": "Doom 3",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "doom3",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://idnet.ua-corp.com:27650"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "openjk": {
+            "name": "Star Wars Jedi Knight II: Jedi Academy",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "doom3",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://idnet.ua-corp.com:27650"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "q2": {
+            "name": "Quake II",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "quake2",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://netdome.biz:27900"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "q3a": {
+            "name": "Quake III Arena",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "quake2",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://master3.idsoftware.com:27950", "master://master.quake3arena.com:27950", "master://master.ioquake3.org:27950", "master://dpmaster.deathmask.net:27950", "master://master.maverickservers.com:27950"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "q4": {
+            "name": "Quake 4",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "quake4",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://q4master.idsoftware.com:27650"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "qw": {
+            "name": "QuakeWorld",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "qwcl",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://qwmaster.ocrana.de:27000"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "rtcw": {
+            "name": "Return to Castle Wolfenstein",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "rtcwmp",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://107.161.23.68:27950"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "et": {
+            "name": "Wolfenstein: Enemy Territory",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "rtcwmp",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://107.161.23.68:27950"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "openarena": {
+            "name": "OpenArena",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "openarena",
+                    "gui_weight": 1
+                },
+                "workdir": {
+                    "type": "s",
+                    "default": "",
+                    "gui_weight": 2
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://master.ioquake3.org:27950", "master://dpmaster.deathmask.net:27950"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "openttd": {
+            "name": "OpenTTD",
+            "backend": "qstat",
+            "launch_pattern": "openttd",
+            "settings": {
+                "path": {
+                    "type": "s",
+                    "default": "openttd",
+                    "gui_weight": 1
+                },
+                "master_uri": {
+                    "type": "as",
+                    "default": ["master://master.openttd.org:3978"],
+                    "gui_weight": 3
+                }
+            }
+        },
+        "stef1": {
+            "name": "Star Trek: Voyager - Elite Force",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": [
+                "path",
+                "workdir",
+                "master_uri"
+            ]
+        },
+        "turtlearena": {
+            "name": "Turtle Arena",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": [
+                "path",
+                "workdir",
+                "master_uri"
+            ]
+        },
+        "unvanquished": {
+            "name": "Unvanquished",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": [
+                "path",
+                "workdir",
+                "master_uri"
+            ]
+        },
+        "urbanterror": {
+            "name": "Urban Terror",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": [
+                "path",
+                "workdir",
+                "master_uri"
+            ]
+        },
+        "warsow": {
+            "name": "Warsow",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": [
+                "path",
+                "workdir",
+                "master_uri"
+            ]
+        },
+        "wop": {
+            "name": "World of Padman",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": [
+                "path",
+                "workdir",
+                "master_uri"
+            ]
+        },
+        "xonotic": {
+            "name": "Xonotic",
+            "backend": "qstat",
+            "launch_pattern": "quake",
+            "settings": [
+                "path",
+                "workdir",
+                "master_uri"
+            ]
+        }
     }
-}
